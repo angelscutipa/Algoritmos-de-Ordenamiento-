@@ -51,17 +51,25 @@ void insercion(int *p, int tam){
 
 void cocktail(int *p, int tam){
     int izq=0, der=tam-1;
+    bool ter=true;
+    int cont=0;
     for (int i=0; i<tam/2; i++){
         for (int j=izq; j<der; j++){
-            if(*(p+j)>*(p+j+1))
+            if(*(p+j)>*(p+j+1)){
                 swap(*(p+j),*(p+j+1));
+                ter=false;
+            }
         }
         der--;
         for (int j=der; j>izq; j--){
-            if(*(p+j)<*(p+j-1))
+            if(*(p+j)<*(p+j-1)){
                 swap(*(p+j),*(p+j-1));
+                ter=false;
+            }
         }
         izq++;
+        if (ter==true)
+            break;
     }
 }
 
@@ -88,12 +96,12 @@ void quicksort(int *p, int ini, int tam1){
 
 int main()
 {
-    int a[]={87,6,3,8,4,9,7,2,12,67,34,5,23,76,1};
+    int a[]={34,8,2,6,1,5,78,23,45};
     int *p=a;
-    int tam=15;
+    int tam=9;
     for(int i=0; i<tam; i++)
         cout<<a[i]<<"--"<<endl;
-    insercion(p,tam);
+    quicksort(p,0,tam);
     for(int i=0; i<tam; i++)
         cout<<a[i]<<endl;
     return 0;
